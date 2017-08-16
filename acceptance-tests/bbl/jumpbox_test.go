@@ -16,7 +16,7 @@ import (
 	"github.com/onsi/gomega/gexec"
 )
 
-var _ = Describe("credhub test", func() {
+var _ = FDescribe("credhub test", func() {
 	var (
 		bbl     actors.BBL
 		bosh    actors.BOSH
@@ -34,7 +34,7 @@ var _ = Describe("credhub test", func() {
 		boshcli = actors.NewBOSHCLI()
 		state = acceptance.NewState(configuration.StateFileDir)
 
-		session := bbl.Up("gcp", []string{"--name", bbl.PredefinedEnvID(), "--credhub"})
+		session := bbl.Up(configuration.IAAS, []string{"--name", bbl.PredefinedEnvID()})
 		Eventually(session, 40*time.Minute).Should(gexec.Exit(0))
 	})
 
